@@ -30,12 +30,7 @@ if (Meteor.isClient) {
       console.log(event);
 
       // Insert a task into the collection
-      Tasks.insert({
-        text: text,
-        createdAt: new Date(),           // current time
-        owner: Meteor.userId(),          // _id of logged in user
-        username: Meteor.user().username // username of logged in user
-      });
+      Meteor.call("addTask", text);
 
       // Clear form
       event.target.text.value = "";
@@ -48,12 +43,10 @@ if (Meteor.isClient) {
   Template.task.events({
     "click .toggle-checked": function () {
       // Set the checked property to the opposite of it's current value
-      Tasks.update(this._id, {
-        $set: {checked: ! this.checked}
-      });
+      Meteor.call("setChecked", this._id, ! this.checked);
     },
     "click .delete": function () {
-      Tasks.remove(this._id);
+      Meteor.call("deleteTask", this._id);
     }
   });
 
