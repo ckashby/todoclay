@@ -2,13 +2,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-      <title>Todo List</title>
+      <title>Let's do...</title>
 </head>
 
 <body>
   <div class="container">
     <header>
-      <h1>Todo List ({{incompleteCount}})</h1>
+      <h1>Let's do... ({{incompleteCount}})</h1>
+
+      <p>Suggest an activity or event to share with friends</p>
 
       <!-- Welcome {{currentUser.username}}  -->
 
@@ -21,7 +23,7 @@
 
       {{#if currentUser}}
       <form class="new-task">
-        <input type="text" name="text" placeholder="Add todo task...">
+        <input type="text" name="text" placeholder="Add an activities or events...">
       </form>
       {{/if}}
     </header>
