@@ -1,7 +1,20 @@
 Tasks = new Mongo.Collection("tasks");
 
+if (Meteor.isServer) {
+  // This code only runs on the server
+  Meteor.publish("tasks", function() {
+    return Tasks.find();
+  });
+}
+
 if (Meteor.isClient) {
   // This code only runs on the client
+  Meteor.subscribe("tasks");
+
+  Accounts.ui.config({
+    passwordSignupFields: "USERNAME_ONLY"
+  });
+
   Template.body.helpers({
     tasks: function () {
       if (Session.get("hideCompleted")) {
@@ -48,10 +61,6 @@ if (Meteor.isClient) {
     "click .delete": function () {
       Meteor.call("deleteTask", this._id);
     }
-  });
-
-  Accounts.ui.config({
-    passwordSignupFields: "USERNAME_ONLY"
   });
 
 }
